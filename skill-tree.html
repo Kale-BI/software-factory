@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The skill tree — The Software Factory</title>
 <meta name="description" content="Kale's twenty-two agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Software Factory">
+<meta property="og:title" content="The skill tree — The Software Factory">
+<meta property="og:description" content="Kale's twenty-two agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
+<meta property="og:url" content="https://factory.eatkale.ai/skill-tree.html">
+<meta property="og:image" content="https://factory.eatkale.ai/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -58,21 +68,18 @@
     should happen, because a column's name varies per tracker and no skill should ever have held
     it.</p>
 
-  <h2>What the purge taught</h2>
+  <h2>What the cut taught</h2>
   <ul>
-    <li><b>Two "unused" skills were kept and wired instead of killed</b> — the census found them
-      unreferenced, but the reference was genuinely missing rather than the skill: implement now calls
-      the debugging skill when a failure resists explanation, and close-out calls the merge-conflict
-      skill when a merge conflicts.</li>
-    <li><b>One skill was born from the purge:</b> <code>brief</code>, the reference skill owning the
+    <li><b>Two "unused" skills were kept and wired instead of killed</b> — they were unreferenced, but
+      the reference was genuinely missing rather than the skill: implement now calls the debugging
+      skill when a failure resists explanation, and close-out calls the merge-conflict skill when a
+      merge conflicts.</li>
+    <li><b>One skill was born from the cut:</b> <code>brief</code>, the reference skill owning the
       agent-ready contract that three other skills had each been restating. One responsibility, one
       home.</li>
     <li><b>One skill was reclassified rather than moved:</b> <code>evidence</code> looked like a
-      helper, but nothing consumed it as a fact — it is the spine stage between implement and human
-      review, and it deliberately runs as its own invocation so the judge sits outside the system
-      under test.</li>
-    <li><b>A convention with no instances was deleted.</b> Dead frontmatter is documentation of a
-      thing that does not happen.</li>
+      helper, but it is the spine stage between implement and human review — and it deliberately runs
+      as its own step so the judge sits outside the system under test.</li>
   </ul>
   <div class="callout"><b>The quiet rule underneath:</b> the tree is derived from the process, so its
     size is a consequence, not a target. If the process grows a stage, the tree grows a skill; nothing

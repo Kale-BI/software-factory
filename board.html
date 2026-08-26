@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The board — The Software Factory</title>
 <meta name="description" content="The exact semantics of Kale's board: every column means something precise, and every label is a claim about what a ticket waits for.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Software Factory">
+<meta property="og:title" content="The board — The Software Factory">
+<meta property="og:description" content="The exact semantics of Kale's board: every column means something precise, and every label is a claim about what a ticket waits for.">
+<meta property="og:url" content="https://factory.eatkale.ai/board.html">
+<meta property="og:image" content="https://factory.eatkale.ai/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,10 +39,9 @@
       <tr><td><code>Done</code></td><td>Verified in production</td><td>Not merely merged; for repos with no deploy, the repo's delivery doctrine names its terminal evidence in advance</td></tr>
     </tbody>
   </table></div>
-  <div class="callout"><b>What is not here matters too.</b> The board once had a "Ready to go" column
-    — a parking state for plans awaiting verdicts, from a triage design since retired. When the
-    machinery that needed it went, the column went with it. A state no stage reads is a state the
-    process cannot explain, so the board keeps exactly the states the process uses.</div>
+  <div class="callout"><b>What is not here matters too.</b> A state no stage reads is a state the
+    process cannot explain, so the board keeps exactly the states the process uses — columns have
+    been removed when the machinery that needed them went.</div>
 
   <h2>Labels: what a ticket waits for</h2>
   <p>A label is a claim about what the ticket <b>waits for</b> — never about what anyone is currently

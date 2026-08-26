@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+:root {
+  --ivory:#FAF9F5; --paper:#FFFFFF; --slate:#141413;
+  --clay:#D97757; --clay-d:#B85C3E; --oat:#E3DACC;
+  --g300:#D1CFC5; --g500:#87867F; --g600:#67665F; --g700:#3D3D3A;
+}
+* { margin:0; box-sizing:border-box; }
+body { width:1200px; height:630px; background:var(--ivory); overflow:hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display:flex; align-items:center; }
+.left { padding:0 0 0 84px; width:720px; }
+.eyebrow { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size:20px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--g600);
+  display:flex; align-items:center; gap:18px; margin-bottom:34px; }
+.eyebrow::before { content:""; width:40px; height:3px; background:var(--clay); }
+h1 { font-family: ui-serif, Georgia, "Times New Roman", serif; font-weight:500;
+  font-size:76px; line-height:1.06; letter-spacing:-.018em; color:var(--slate); }
+h1 em { font-style:italic; color:var(--clay-d); }
+.sub { margin-top:30px; font-size:26px; line-height:1.45; color:var(--g700); max-width:560px; }
+.right { flex:1; display:flex; align-items:center; justify-content:center; padding-right:64px; }
+.right svg { width:330px; height:auto; }
+.oa { fill:var(--oat); stroke:var(--g500); stroke-width:2.5; }
+.wh { fill:var(--paper); stroke:var(--g500); stroke-width:2.5; }
+.cl { fill:var(--clay); }
+.ln { stroke:var(--g500); stroke-width:2.5; fill:none; stroke-linecap:round; }
+.lc { stroke:var(--clay); stroke-width:2.5; fill:none; stroke-linecap:round; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <p class="eyebrow">Kale · engineering</p>
+    <h1>The machine that <em>builds</em> our software</h1>
+    <p class="sub">The whole process, published in full — board, skill tree, prompts included.</p>
+  </div>
+  <div class="right"><svg viewBox="0 0 120 108">
+    <rect class="cl" x="36" y="4" width="48" height="13" rx="5"/>
+    <rect class="oa" x="30" y="25" width="60" height="14" rx="5"/>
+    <rect class="wh" x="30" y="47" width="60" height="14" rx="5"/>
+    <rect class="oa" x="30" y="69" width="60" height="14" rx="5"/>
+    <path class="lc" d="M60 25 L60 17"/>
+    <path class="ln" d="M60 47 L60 39 M60 69 L60 61"/>
+    <rect class="wh" x="4" y="91" width="24" height="13" rx="4"/>
+    <rect class="wh" x="32" y="91" width="24" height="13" rx="4"/>
+    <rect class="wh" x="60" y="91" width="24" height="13" rx="4"/>
+    <rect class="oa" x="88" y="91" width="24" height="13" rx="4"/>
+    <path class="ln" d="M16 91 L16 76 L30 76"/><path class="ln" d="M44 91 L44 83"/>
+    <path class="ln" d="M72 91 L72 83"/><path class="ln" d="M100 91 L100 76 L90 76"/>
+  </svg></div>
+</body>
+</html>
