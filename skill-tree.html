@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The skill tree — The Software Factory</title>
+<meta name="description" content="Kale's twenty-two agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap page page-top">
+  <a class="back" href="index.html">&#8592; all pages</a>
+  <p class="eyebrow">Reference · 02</p>
+  <h1>The skill <em>tree</em></h1>
+  <p class="lede">Twenty-two skills run the machine. Each one is here because something in the system
+    references it — and for no other reason.</p>
+  <div class="rule"></div>
+
+  <h2>Admission by reference</h2>
+  <p>The tree had grown to twenty-eight skills, and a census showed what growth without a rule
+    produces: six skills nothing referenced anywhere, one vendored skill accounting for 61% of the
+    repo's lines with no in-repo dependents, three manifest rows pointing at folders deleted weeks
+    earlier. Nothing was wrong with any individual skill. What was missing was a test for whether a
+    skill <i>belongs</i>.</p>
+  <p>The test is mechanical: a skill lives in the tree if, and only if, something in the system
+    references it — another skill, a seeded doc, a runner's prompt, or a cron. A skill that is merely
+    useful goes to a personal library instead. Usefulness is not membership, and "we might want it
+    someday" is the exact argument the rule exists to refuse. Applying it cut the tree to
+    twenty-two.</p>
+
+  <h2>The tree</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Class</th><th>Skills</th><th>Admitted because</th></tr></thead>
+    <tbody>
+      <tr><td><b>Spine stages &amp; entries</b></td>
+        <td><code>grilling</code> <code>wayfinder</code> <code>triage</code> <code>to-spec</code> <code>to-tickets</code> <code>implement</code> <code>evidence</code> <code>merge-and-deploy</code></td>
+        <td>Each is a stage of <a href="machine.html">the machine</a></td></tr>
+      <tr><td><b>Invoked by the spine</b></td>
+        <td><code>tdd</code> <code>code-review</code> <code>diagnosing-bugs</code> <code>resolving-merge-conflicts</code> <code>domain-modeling</code> <code>prototype</code> <code>research</code> <code>grill-with-docs</code> <code>codebase-design</code> <code>improve-codebase-architecture</code> <code>writing-for-agents</code></td>
+        <td>A spine skill calls them by name</td></tr>
+      <tr><td><b>Reference skills</b></td>
+        <td><code>brief</code> <code>writing-for-humans</code></td>
+        <td>The single home of an org-wide fact, consumed as <code>$name</code> by other skills</td></tr>
+      <tr><td><b>Setup</b></td>
+        <td><code>setup-engineering-workflow</code></td>
+        <td>Seeds each repo's per-repo configuration</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>The seam rule</h2>
+  <p>Every fact a skill needs is placed by <b>where it varies</b>. Varies per repo → a seeded doc in
+    that repo, written by the setup skill. Shared across the org → a reference skill. Varies per
+    machine or runner → the runtime that owns it, whether that is a dispatcher's config or a personal
+    agent library. Skills are interfaces; a skill carrying a fact from the wrong class is misplaced
+    configuration wearing a skill's clothes.</p>
+  <p>The rule predicts things. When the stuck column was renamed on the board, the rename touched four
+    repos' configuration files and <b>zero skills</b> — exactly what placement-by-variance says
+    should happen, because a column's name varies per tracker and no skill should ever have held
+    it.</p>
+
+  <h2>What the purge taught</h2>
+  <ul>
+    <li><b>Two "unused" skills were kept and wired instead of killed</b> — the census found them
+      unreferenced, but the reference was genuinely missing rather than the skill: implement now calls
+      the debugging skill when a failure resists explanation, and close-out calls the merge-conflict
+      skill when a merge conflicts.</li>
+    <li><b>One skill was born from the purge:</b> <code>brief</code>, the reference skill owning the
+      agent-ready contract that three other skills had each been restating. One responsibility, one
+      home.</li>
+    <li><b>One skill was reclassified rather than moved:</b> <code>evidence</code> looked like a
+      helper, but nothing consumed it as a fact — it is the spine stage between implement and human
+      review, and it deliberately runs as its own invocation so the judge sits outside the system
+      under test.</li>
+    <li><b>A convention with no instances was deleted.</b> Dead frontmatter is documentation of a
+      thing that does not happen.</li>
+  </ul>
+  <div class="callout"><b>The quiet rule underneath:</b> the tree is derived from the process, so its
+    size is a consequence, not a target. If the process grows a stage, the tree grows a skill; nothing
+    else grows it.</div>
+
+  <footer><span class="k">Kale · the process is the product's floor plan</span>
+    <span>Generated from the skill tree's decision record</span></footer>
+</div>
+</body>
+</html>

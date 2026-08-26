@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The board — The Software Factory</title>
+<meta name="description" content="The exact semantics of Kale's board: every column means something precise, and every label is a claim about what a ticket waits for.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap page page-top">
+  <a class="back" href="index.html">&#8592; all pages</a>
+  <p class="eyebrow">Reference · 01</p>
+  <h1>The <em>board</em></h1>
+  <p class="lede">State transitions are the process, so every column means something exact. This is the
+    whole vocabulary — there is deliberately nothing else.</p>
+  <div class="rule"></div>
+
+  <h2>Columns</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Column</th><th>Means</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><code>Backlog</code></td><td>Not yet delegated</td><td>Swept daily by <a href="morning-triage.html">the morning triage</a>; an unlabeled ticket here is the definition of untriaged</td></tr>
+      <tr><td><code>Todo</code></td><td>Delegated, waiting for a session</td><td>Dispatchers pick from here</td></tr>
+      <tr><td><code>In Progress</code></td><td>An agent is working</td><td>&mdash;</td></tr>
+      <tr><td><code>Human Review</code></td><td>The human gate</td><td>PR ready, evidence posted; a person opens the gate by delegating close-out</td></tr>
+      <tr><td><code>Ship</code></td><td>Landing in progress</td><td>Never parked — a ticket never sits in Ship with nobody working it</td></tr>
+      <tr><td><code>Blocked</code></td><td>Waiting on a human</td><td>Always carries a diagnosis — a stuck run's write-up, a decision card, or a grilling agenda, with the label saying which</td></tr>
+      <tr><td><code>Done</code></td><td>Verified in production</td><td>Not merely merged; for repos with no deploy, the repo's delivery doctrine names its terminal evidence in advance</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b>What is not here matters too.</b> The board once had a "Ready to go" column
+    — a parking state for plans awaiting verdicts, from a triage design since retired. When the
+    machinery that needed it went, the column went with it. A state no stage reads is a state the
+    process cannot explain, so the board keeps exactly the states the process uses.</div>
+
+  <h2>Labels: what a ticket waits for</h2>
+  <p>A label is a claim about what the ticket <b>waits for</b> — never about what anyone is currently
+    doing to it. Four waiting states, applied by triage; unlabeled means untriaged.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Label</th><th>Waits for</th><th>Dispatched?</th></tr></thead>
+    <tbody>
+      <tr><td><code>ready-for-agent</code></td><td>Nothing — an AFK session can start from the attached brief</td><td><b>Yes</b> — the only label agents dispatch from</td></tr>
+      <tr><td><code>ready-for-human</code></td><td>Human execution — the brief is complete but a step needs a person</td><td>No — the human work queue</td></tr>
+      <tr><td><code>needs-human-input</code></td><td>One reply to a decision card</td><td>No</td></tr>
+      <tr><td><code>needs-grilling</code></td><td>A session — the questions are entangled or open-form</td><td>No</td></tr>
+    </tbody>
+  </table></div>
+  <p>The full routing logic — how a label falls out of drafting the brief, and the five-clause test
+    that separates a card from a session — is on
+    <a href="morning-triage.html">the morning triage</a> page.</p>
+
+  <h2>Why the vocabulary is this small</h2>
+  <p>Columns say where work is in the spine; labels say what parked work waits for. Neither ever says
+    what someone is doing — activity is visible in the session and the PR, and duplicating it into
+    state produces states that lie. Retired vocabulary is renamed, never deleted, so the history of
+    closed tickets keeps making sense.</p>
+
+  <footer><span class="k">Kale · the process is the product's floor plan</span>
+    <span>Generated from the board's own configuration</span></footer>
+</div>
+</body>
+</html>

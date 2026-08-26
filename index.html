@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Software Factory — Kale</title>
+<meta name="description" content="How Kale runs engineering with a small team and a large number of agent sessions — the whole process published in full, prompts included.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Kale · engineering</p>
+  <h1>The machine that <em>builds</em> our software</h1>
+  <p class="intro">Kale ships with a small team and a large number of agent sessions. A process
+    that lives in habit is a process an agent cannot join — so ours is written down, argued from
+    first principles, and published in full. Prompts included.</p>
+  <nav class="toc">
+    <a href="machine.html"><span class="n">00</span> The machine</a>
+    <a href="#foundations"><span class="n">01</span> Foundations</a>
+    <a href="#running"><span class="n">02</span> The factory running</a>
+    <a href="#reference"><span class="n">03</span> Reference</a>
+  </nav>
+</header>
+
+<div class="feature">
+  <a class="feat" href="machine.html">
+    <div class="fthumb"><svg viewBox="0 0 120 108" aria-hidden="true">
+      <rect class="cl" x="36" y="4" width="48" height="13" rx="5"/>
+      <rect class="oa" x="30" y="25" width="60" height="14" rx="5"/>
+      <rect class="wh" x="30" y="47" width="60" height="14" rx="5"/>
+      <rect class="oa" x="30" y="69" width="60" height="14" rx="5"/>
+      <path class="lc" d="M60 25 L60 17"/>
+      <path class="ln" d="M60 47 L60 39 M60 69 L60 61"/>
+      <rect class="wh" x="4" y="91" width="24" height="13" rx="4"/>
+      <rect class="wh" x="32" y="91" width="24" height="13" rx="4"/>
+      <rect class="wh" x="60" y="91" width="24" height="13" rx="4"/>
+      <rect class="oa" x="88" y="91" width="24" height="13" rx="4"/>
+      <path class="ln" d="M16 91 L16 76 L30 76"/><path class="ln" d="M44 91 L44 83"/>
+      <path class="ln" d="M72 91 L72 83"/><path class="ln" d="M100 91 L100 76 L90 76"/>
+    </svg></div>
+    <div class="fbody">
+      <p class="ftitle">The machine</p>
+      <p class="fdesc">Four ways in, one spine out — the whole process on one diagram, reading
+        upward from the four entry points to Done at the top. Every box opens: who acts there,
+        what evidence gates it, what it leaves behind.</p>
+      <p class="fgo"><span>Open the diagram</span><span class="arrow">→</span></p>
+    </div>
+  </a>
+</div>
+
+<section id="foundations">
+  <div class="sec-head"><span class="idx">01</span><h2>Foundations</h2><span class="count">2 pages</span></div>
+  <p class="sec-intro">The argument the rest of the machine is derived from. Read these two and you
+    can predict most of what follows; disagree with them and you should disagree with everything else.</p>
+  <div class="grid">
+    <a class="card" href="why.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect class="wh" x="6" y="12" width="46" height="56" rx="5"/>
+        <rect class="oa" x="66" y="12" width="46" height="56" rx="5"/>
+        <line class="ln" x1="14" y1="26" x2="44" y2="26"/><line class="ln" x1="14" y1="36" x2="38" y2="36"/>
+        <line class="ln" x1="14" y1="46" x2="41" y2="46"/>
+        <line class="lc" x1="74" y1="26" x2="104" y2="26"/><line class="lc" x1="74" y1="36" x2="96" y2="36"/>
+        <circle class="cl" cx="89" cy="54" r="7"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">Why this exists</div>
+        <div class="cdesc">Agent sessions start with no memory of yesterday. That single fact is why the process is a document and not a habit.</div>
+        <div class="cfile"><span>why-this-exists</span><span class="arrow">→</span></div></div>
+    </a>
+    <a class="card" href="principles.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <line class="ln" x1="18" y1="10" x2="18" y2="70"/>
+        <circle class="cl" cx="18" cy="16" r="5"/><circle class="ol" cx="18" cy="32" r="5"/>
+        <circle class="fl" cx="18" cy="48" r="5"/><circle class="fl" cx="18" cy="64" r="5"/>
+        <rect class="fl" x="32" y="13" width="52" height="5" rx="2.5"/>
+        <rect class="fl" x="32" y="29" width="44" height="5" rx="2.5"/>
+        <rect class="fl" x="32" y="45" width="58" height="5" rx="2.5"/>
+        <rect class="fl" x="32" y="61" width="38" height="5" rx="2.5"/>
+        <rect class="oa" x="94" y="24" width="20" height="32" rx="4"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">The five principles</div>
+        <div class="cdesc">Humans decide. The tracker is the record. Evidence gates every transition. No AFK without a definition of done. Sessions sized to the smart zone.</div>
+        <div class="cfile"><span>five-principles</span><span class="arrow">→</span></div></div>
+    </a>
+  </div>
+</section>
+
+<section id="running">
+  <div class="sec-head"><span class="idx">02</span><h2>The factory running</h2><span class="count">3 pages</span></div>
+  <p class="sec-intro">The diagram shows the process; these pages show it alive — what happens on a
+    normal morning, what actually dispatches the work, and why neither of those things is the brain.</p>
+  <div class="grid">
+    <a class="card" href="morning-triage.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <circle class="oa" cx="24" cy="24" r="14"/>
+        <path class="lc" d="M24 16 L24 24 L30 28"/>
+        <rect class="wh" x="52" y="8" width="60" height="14" rx="4"/>
+        <rect class="oa" x="52" y="28" width="60" height="14" rx="4"/>
+        <rect class="wh" x="52" y="48" width="60" height="14" rx="4"/>
+        <circle class="ol" cx="60" cy="15" r="3.5"/><circle class="cl" cx="60" cy="35" r="3.5"/>
+        <circle class="ol" cx="60" cy="55" r="3.5"/>
+        <path class="ln" d="M12 52 Q24 42 36 52"/><circle class="cl" cx="24" cy="62" r="8"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">The morning triage</div>
+        <div class="cdesc">A scheduled agent sweeps the backlog before anyone is awake, drafting the brief each ticket needs. The human wakes up to decision cards, not a pile.</div>
+        <div class="cfile"><span>morning-triage</span><span class="arrow">→</span></div></div>
+    </a>
+    <a class="card" href="symphony.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect class="wh" x="8" y="10" width="104" height="60" rx="6"/>
+        <line class="ln" x1="8" y1="24" x2="112" y2="24"/>
+        <circle class="cl" cx="17" cy="17" r="3"/><circle class="fl" cx="27" cy="17" r="3"/><circle class="fl" cx="37" cy="17" r="3"/>
+        <path class="lc" d="M18 38 L26 44 L18 50"/>
+        <rect class="fl" x="32" y="41" width="44" height="5" rx="2.5"/>
+        <rect class="fl" x="18" y="56" width="66" height="5" rx="2.5"/>
+        <rect class="ol" x="90" y="54" width="14" height="9" rx="3"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">Symphony</div>
+        <div class="cdesc">The dispatcher. One unconditional prompt — read your column, act accordingly — published verbatim, along with the upgrade we built and then deliberately threw away.</div>
+        <div class="cfile"><span>symphony</span><span class="arrow">→</span></div></div>
+    </a>
+    <a class="card" href="actors.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <circle class="cl" cx="30" cy="26" r="10"/><path class="ln" d="M14 52 Q30 38 46 52"/>
+        <rect class="oa" x="66" y="16" width="38" height="30" rx="6"/>
+        <circle class="fl" cx="77" cy="29" r="3.5"/><circle class="fl" cx="93" cy="29" r="3.5"/>
+        <line class="ln" x1="76" y1="38" x2="94" y2="38"/>
+        <line class="ln" x1="85" y1="46" x2="85" y2="56"/>
+        <rect class="wh" x="14" y="62" width="92" height="12" rx="6"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">Actors and runners</div>
+        <div class="cdesc">Who acts at each stage — and why no product name appears in the answer. The unit of AFK work is the agent session, not the orchestrator.</div>
+        <div class="cfile"><span>actors-and-runners</span><span class="arrow">→</span></div></div>
+    </a>
+  </div>
+</section>
+
+<section id="reference">
+  <div class="sec-head"><span class="idx">03</span><h2>Reference</h2><span class="count">3 pages</span></div>
+  <p class="sec-intro">The parts most teams keep private: the board's exact semantics, the skill tree
+    that runs each stage, and the conventions that keep a tracker full of agents legible to humans.</p>
+  <div class="grid">
+    <a class="card" href="board.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect class="wh" x="4" y="8" width="26" height="64" rx="5"/><rect class="wh" x="34" y="8" width="26" height="64" rx="5"/>
+        <rect class="oa" x="64" y="8" width="26" height="64" rx="5"/><rect class="wh" x="94" y="8" width="22" height="64" rx="5"/>
+        <rect class="fl" x="9" y="16" width="16" height="9" rx="3"/><rect class="fl" x="9" y="30" width="16" height="9" rx="3"/>
+        <rect class="cl" x="39" y="16" width="16" height="9" rx="3"/>
+        <rect class="ol" x="69" y="16" width="16" height="9" rx="3"/><rect class="fl" x="69" y="30" width="16" height="9" rx="3"/>
+        <rect class="sl" x="99" y="16" width="12" height="9" rx="3"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">The board</div>
+        <div class="cdesc">State transitions are the process, so every column means something exact — and every label is a claim about what a ticket waits for, never what anyone is doing to it.</div>
+        <div class="cfile"><span>the-board</span><span class="arrow">→</span></div></div>
+    </a>
+    <a class="card" href="skill-tree.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect class="oa" x="46" y="4" width="28" height="16" rx="4"/>
+        <path class="ln" d="M60 20 L60 30 M24 30 L96 30 M24 30 L24 40 M60 30 L60 40 M96 30 L96 40"/>
+        <rect class="wh" x="8" y="40" width="32" height="16" rx="4"/>
+        <rect class="wh" x="44" y="40" width="32" height="16" rx="4"/>
+        <rect class="wh" x="80" y="40" width="32" height="16" rx="4"/>
+        <path class="lc" d="M24 56 L24 64 M96 56 L96 64"/>
+        <circle class="cl" cx="24" cy="70" r="5"/><circle class="ol" cx="96" cy="70" r="5"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">The skill tree</div>
+        <div class="cdesc">Twenty-two skills, admitted by reference and placed by variance. Derived from the process, not accumulated — and recently cut from twenty-eight to prove it.</div>
+        <div class="cfile"><span>skill-tree</span><span class="arrow">→</span></div></div>
+    </a>
+    <a class="card" href="evidence.html">
+      <div class="thumb"><svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect class="wh" x="8" y="8" width="64" height="64" rx="6"/>
+        <line class="ln" x1="16" y1="22" x2="56" y2="22"/><line class="ln" x1="16" y1="34" x2="48" y2="34"/>
+        <line class="lc" x1="16" y1="46" x2="52" y2="46"/>
+        <rect class="oa" x="82" y="20" width="30" height="40" rx="5"/>
+        <path class="lc" d="M90 40 L95 46 L104 32"/>
+      </svg></div>
+      <div class="cbody"><div class="ctitle">Evidence and dossiers</div>
+        <div class="cdesc">Agents write to the tracker like colleagues, not like log files: a one-breath note on the ticket, the long story at the effort's dossier, proof gating every transition.</div>
+        <div class="cfile"><span>evidence-and-dossiers</span><span class="arrow">→</span></div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="k">Kale · the process is the product's floor plan</span>
+  <span>Generated from the team's process record · <a href="https://github.com/Kale-BI/software-factory">source</a></span>
+</footer>
+</div>
+</body>
+</html>

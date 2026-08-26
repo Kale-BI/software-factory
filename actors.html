@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actors and runners — The Software Factory</title>
+<meta name="description" content="Who acts at each stage of Kale's process — and why no product name appears in the answer.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap page page-top">
+  <a class="back" href="index.html">&#8592; all pages</a>
+  <p class="eyebrow">The factory running · 03</p>
+  <h1>Actors and <em>runners</em></h1>
+  <p class="lede">Who acts at each stage — and why no product name appears in the answer.</p>
+  <div class="rule"></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Stage</th><th>Actor</th></tr></thead>
+    <tbody>
+      <tr><td>Grilling, wayfinder, to-spec, to-tickets</td><td><span class="pill human">human in the loop</span></td></tr>
+      <tr><td>Triage, implement, evidence</td><td><span class="pill agent">agent session</span></td></tr>
+      <tr><td>Close out</td><td><span class="pill agent">agent session</span> under explicit delegation</td></tr>
+      <tr><td>Human review</td><td><span class="pill human">the human gate</span></td></tr>
+    </tbody>
+  </table></div>
+  <h2>Runners are interchangeable</h2>
+  <p>The unit of AFK work is the <b>agent session</b>: one fresh context window working one ticket
+    from its brief to its evidence. <a href="symphony.html">Symphony</a>, the
+    <a href="morning-triage.html">triage cron</a>, or a person's terminal are interchangeable ways of
+    launching one — which is why the process record never names them. A process that depends on a
+    particular orchestrator is a process you cannot replace parts of.</p>
+  <p>The two runner pages on this site name products because runners are real and worth showing. But
+    notice the direction of the dependency: the runners read the process; the process never reads the
+    runners. Swap the dispatcher tomorrow and every page except its own stays true.</p>
+  <div class="callout"><b>One consequence:</b> board comments and PR descriptions stay contract-voiced
+    no matter which runner launched the session that wrote them. Personality belongs to conversational
+    agents; the tracker gets the same colleague's voice from everyone.</div>
+  <footer><span class="k">Kale · the process is the product's floor plan</span>
+    <span>Generated from the team's process record</span></footer>
+</div>
+</body>
+</html>

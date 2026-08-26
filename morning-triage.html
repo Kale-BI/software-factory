@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The morning triage — The Software Factory</title>
+<meta name="description" content="A scheduled agent sweeps Kale's backlog before anyone is awake, drafting the brief each ticket needs. The human wakes up to decision cards, not a pile.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap page page-top">
+  <a class="back" href="index.html">&#8592; all pages</a>
+  <p class="eyebrow">The factory running · 01</p>
+  <h1>The morning <em>triage</em></h1>
+  <p class="lede">Before anyone is awake, a scheduled agent session sweeps the backlog and attempts,
+    for every untriaged ticket, the one thing that reveals what the ticket actually needs: the full
+    AFK brief. The human wakes up to decision cards, not a pile.</p>
+  <div class="rule"></div>
+
+  <h2>Brief-first, not score-first</h2>
+  <p>Most triage classifies a ticket as written: read it, guess its size, guess its risk, apply a
+    label. Ours classifies by <b>drafting</b>. The session always attempts the complete brief — the
+    contract an unattended agent would need: deliverable, validation gate, plan — and the label falls
+    out of <b>where the draft fails</b>. Entanglement between decisions only shows up when you try to
+    write their option lists; scoring never finds it.</p>
+  <p>Before drafting, every open question on the ticket is classified by who holds the answer:</p>
+  <ul>
+    <li><b>Fact</b> — the world holds it (API capability, library behaviour, existing code). Looked up
+      during triage, against primary sources, and cited in the brief.</li>
+    <li><b>Preference</b> — the maintainer holds it. Carried forward to routing.</li>
+    <li><b>Empirical</b> — nobody holds it yet. A prototype answers it.</li>
+  </ul>
+  <div class="callout"><b>The discipline:</b> a question answerable from documentation that reaches a
+    human is a triage bug — the maintainer's attention was spent to save the agent a lookup.</div>
+
+  <h2>Four labels, one meaning</h2>
+  <p>A label is a claim about what the ticket <b>waits for</b> — never about what anyone is currently
+    doing to it. An untriaged ticket is simply unlabeled.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Label</th><th>The ticket waits for</th><th>What gets posted</th></tr></thead>
+    <tbody>
+      <tr><td><code>ready-for-agent</code></td><td><b>Nothing.</b> An AFK session can start from the attached brief.</td><td>The brief</td></tr>
+      <tr><td><code>ready-for-human</code></td><td><b>Human execution.</b> The brief is complete, but a step of the plan needs a person.</td><td>The brief — humans start from briefs too</td></tr>
+      <tr><td><code>needs-human-input</code></td><td><b>One reply.</b> Every open decision fits a card the maintainer can answer from their phone.</td><td>A decision card</td></tr>
+      <tr><td><code>needs-grilling</code></td><td><b>A session.</b> The open questions are entangled or open-form.</td><td>A grilling agenda</td></tr>
+    </tbody>
+  </table></div>
+  <p><code>ready-for-agent</code> is the only label agents dispatch from. The other three are human
+    queues — and <code>ready-for-human</code> is the human <i>work</i> queue, not a decision queue.
+    Ties break toward grilling: a wrongly-carded ticket gets built confidently wrong, which costs more
+    than a session.</p>
+
+  <h2>The closed-form test</h2>
+  <p>A blank in the brief qualifies for a decision card only if all five hold. Fail any one and the
+    ticket goes to grilling instead:</p>
+  <div class="prin">
+    <div><span class="n">01</span><span><b>Enumerable.</b><span class="d">You can list 2–4 options and would execute any of them verbatim, happily. Prose options for a visual question fail this; a variants prototype makes them pass.</span></span></div>
+    <div><span class="n">02</span><span><b>Independent.</b><span class="d">The answer leaves every other blank's options unchanged.</span></span></div>
+    <div><span class="n">03</span><span><b>Named.</b><span class="d">Every term the question leans on has one settled meaning in the project's domain model. When different readings of a term produce different tickets, the vocabulary needs a session before the decision does.</span></span></div>
+    <div><span class="n">04</span><span><b>Few.</b><span class="d">At most two blanks on the ticket. More is a conversation wearing a form's clothes.</span></span></div>
+    <div><span class="n">05</span><span><b>Recoverable.</b><span class="d">A wrong pick is cheap to reverse. Schema migrations, public API shapes, pricing go to grilling even as a single clean question — the point is stress-testing the reasoning, not picking.</span></span></div>
+  </div>
+
+  <h2>Prototypes, during triage</h2>
+  <p>A visual blank — "which direction should this UI take" — can never be honestly enumerated in
+    prose. So the triage session builds a throwaway variants prototype on the spot: one
+    self-contained HTML file, two to four distinct directions behind a control bar. The blank becomes
+    genuinely closed-form, and the decision card links the prototype as its options. Behavioural
+    tangles get a clickable logic walkthrough attached to the grilling agenda as session material.
+    Both are disposable by construction: zero setup, state in memory, dead once the verdict is
+    recorded.</p>
+
+  <h2>What the human wakes up to</h2>
+  <p>The sweep presents the board in the order human attention is owed: unlabeled tickets first, then
+    unanswered decision cards, then the grilling shopping list, then the
+    <code>ready-for-human</code> queue. Each card is answerable in one reply — a letter, a concrete
+    tweak ("B with A's header"), or "close it". A hedged reply is treated as a signal the question was
+    not closed-form after all, and the ticket is re-routed to grilling rather than being nagged.</p>
+  <p>Every comment the sweep posts opens with <i>"Generated by AI during triage."</i> — a stranger
+    reading the tracker always knows which voice is speaking.</p>
+
+  <h2>The cron</h2>
+  <p>Every morning at 07:30 London time, a scheduler on an always-on machine fires the sweep. The
+    scheduler is only the alarm clock — it runs a script, not an agent, so there is no second brain
+    to drift. The script queries the tracker for Backlog tickets carrying no triage label and runs
+    <b>one fresh agent session per ticket</b>, in a small parallel pool with a per-run cap, each
+    session working the triage skill to completion and ending in a fixed-format verdict block.</p>
+  <p>The label is the done-marker: because the sweep only ever selects unlabeled tickets, re-running
+    it is free — no queue, no state file, and a ticket the sweep missed today is simply picked up
+    tomorrow. The digest posted to the team's channel is stitched from the sessions' verdict blocks
+    verbatim — no model summarises another model's work — and a thread reply to the digest acts on a
+    ticket through the same skill. Its first real run triaged five tickets in seven minutes: two
+    grilling agendas, two ready-for-human briefs, one evidence-backed close recommendation.</p>
+  <p>This is the per-ticket prompt, verbatim:</p>
+  <pre><code>Invoke the $triage skill on {{TICKET}} and run its loop to completion:
+verify the claim, burn down the fact-blanks, draft the brief, route on the
+blanks, post the artifact and apply exactly one label.
+
+How this unattended run reaches things:
+
+- Linear: GraphQL only — POST https://api.linear.app/graphql with header
+  "Authorization: Bearer $LINEAR_TOKEN" (already exported). You write as the
+  Symphony app user; every comment you post opens with "Generated by AI
+  during triage." per the skill.
+- The ticket's Linear project description names the repos it spans. Clone
+  what you need to verify the claim, shallowly, into $TRIAGE_SCRATCH
+  (`gh repo clone Kale-BI/&lt;repo&gt; "$TRIAGE_SCRATCH/&lt;repo&gt;" -- --depth 50`)
+  and read each repo's docs/agents/ engineering config from there.
+- Read-only outside Linear and $TRIAGE_SCRATCH: never write to a live
+  checkout, never push, never open a PR.
+- No prototypes in cron triage: where the skill would build one, say so in
+  the artifact and route the ticket to needs-grilling instead.
+- The draft brief's long-form home for cron triage is the ticket itself:
+  post the full brief as its own Linear comment, with the short card or
+  agenda comment separate, per the skill's comment formats. Ignore any
+  dossier or external long-form home the skill mentions — do not clone or
+  read the dossiers repo.
+- Apply exactly one of: ready-for-agent, ready-for-human, needs-human-input,
+  needs-grilling. When you recommend closing, post the evidence and label the
+  ticket needs-human-input anyway — on this board an unlabeled ticket gets
+  re-swept tomorrow, and "close it?" is a one-reply decision card.
+
+End your reply with one verdict block, nothing after it:
+
+VERDICT {{TICKET}} &lt;label, or "close"&gt;
+&lt;one line: what you verified, and what the ticket now waits for&gt;
+&lt;needs-human-input only: one line per option, mark the recommendation&gt;</code></pre>
+  <div class="callout"><b>Two details worth stealing.</b> Cron triage builds no prototypes — where the
+    skill would, the ticket routes to grilling instead, because an unattended run should not make
+    design taste calls. And a close recommendation still applies a label: on this board an unlabeled
+    ticket gets re-swept tomorrow, and "close it?" is exactly a one-reply decision card.</div>
+
+  <footer><span class="k">Kale · the process is the product's floor plan</span>
+    <span>Generated from the triage skill</span></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Symphony — The Software Factory</title>
+<meta name="description" content="Kale's dispatcher: one unconditional prompt — read your column, act accordingly — published verbatim, with the upgrade we built and deliberately threw away.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap page page-top">
+  <a class="back" href="index.html">&#8592; all pages</a>
+  <p class="eyebrow">The factory running · 02</p>
+  <h1>Symphony, the <em>dispatcher</em></h1>
+  <p class="lede">Symphony is the runner that launches an agent session on a delegated ticket. It is
+    not the brain — everything below the verb lives in the skill tree — and its whole dispatch
+    contract fits in one prompt, published here verbatim.</p>
+  <div class="rule"></div>
+
+  <h2>One lane, no branching</h2>
+  <p>An earlier version of this prompt held three template lanes, keyed on the ticket's column — the
+    template engine decided the verb before the agent ever woke up. The current prompt is one
+    unconditional text: it names the issue and its column, and the <b>agent</b> reads the column and
+    acts. One session's worth of work per dispatch, then stop; re-dispatch is the loop.</p>
+  <pre><code>You are Symphony, dispatched unattended on Linear issue {{ issue.identifier }},
+currently in column **{{ issue.state }}**. Look at your column and act
+accordingly. One session's worth of work, then stop. Never ask a human.
+
+**Ship** — close out {{ issue.identifier }} ($merge-and-deploy). Ship is the
+human's delegation; look for no further approval.
+
+**Todo / In Progress** — you are working a spec. Read it and its comments,
+then look around the workspace: past sessions leave work behind — build on
+it, don't restart.
+
+- Every sub-issue Done? Review the diff against the spec, mark the spec PR
+  ready for review, move {{ issue.identifier }} to Human Review, and stop.
+- Otherwise pick ONE sub-issue: the first in Todo whose blockers are all
+  Done. Move it to In Progress, then $implement it on the spec's shared
+  branch `spec/{{ issue.identifier }}` and draft PR (create both if
+  missing). Run the repo's feedback loops; never commit red. Then run
+  $evidence on what you built — the proof comment lands on the sub-issue —
+  and move it to Done. Stop.
+- Nothing pickable but open work remains? Comment a diagnosis on
+  {{ issue.identifier }} and move it to Blocked.
+- No sub-issues? {{ issue.identifier }} is its own spec: implement it, run
+  $evidence, open its own PR, and move it to Human Review.
+
+**Any other column** — you have no verb here. Comment a diagnosis on
+{{ issue.identifier }} and stop.</code></pre>
+
+  <h2>What each line is doing</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Column</th><th>The verb</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><code>Ship</code></td><td>Close out — merge, deploy, verify</td><td>Ship <b>is</b> the human's delegation. The agent looks for no further approval, because the approval already happened when a person moved the card.</td></tr>
+      <tr><td><code>Todo</code> / <code>In Progress</code></td><td>Work one sub-issue of the spec, then evidence it, then stop</td><td>One bite per session keeps every session in the smart zone; re-dispatch, not a bigger context, is the loop.</td></tr>
+      <tr><td>Anything else</td><td>Diagnose and stop</td><td>An unknown column fails loud and safe. No verb is ever improvised from state the prompt does not name.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Note what is <i>absent</i>: the prompt never triages, never plans, never asks. Triage happens on
+    a different rhythm entirely — <a href="morning-triage.html">the morning sweep</a> — and by the
+    time Symphony sees a ticket, a human has already delegated it. The <code>$implement</code>,
+    <code>$evidence</code>, and <code>$merge-and-deploy</code> sigils hand off to the
+    <a href="skill-tree.html">skill tree</a>; the prompt owns only the choreography, because that is
+    the one fact that varies with this runner and no other.</p>
+
+  <h2>The upgrade we threw away</h2>
+  <p>One design honesty note, because published processes usually hide these. After implementing, the
+    same session judges its own work in the evidence step. A stronger variant — judging in a
+    <b>separate dispatch</b>, with the sub-issue parked in a new waiting column so the judge inherits
+    no context from the implementer — was designed, briefly landed, and then deliberately reverted
+    the same day.</p>
+  <p>It doubled dispatches and demanded a new board column no human would ever touch, buying insurance
+    against a failure we had never actually observed. And the fresh-eyes property already exists for
+    free at the grain that matters: before a spec reaches Human Review, a session that implemented
+    nothing in that moment reviews the whole diff against the spec. If self-judged evidence ever
+    proves too soft in practice, the separate-dispatch judge is a one-prompt upgrade made on the day
+    the failure is seen — not before.</p>
+  <div class="callout"><b>The principle underneath:</b> board machinery is bought against observed
+    failures, never speculative ones. A state no human touches is a state the process cannot
+    explain.</div>
+
+  <footer><span class="k">Kale · the process is the product's floor plan</span>
+    <span>Generated from the dispatcher's prompt and its decision records</span></footer>
+</div>
+</body>
+</html>
