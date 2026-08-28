@@ -38,10 +38,9 @@ accordingly. One session's worth of work, then stop. Never ask a human.
 **Ship** — close out {{ issue.identifier }} ($merge-and-deploy). Ship is the
 human's delegation; look for no further approval.
 
-**Backlog** — triage {{ issue.identifier }} ($triage): draft the brief,
-perform the route's transition named by the tracker configuration, and
-stop. Your delegation is consent for the whole ride — a ticket routed to
-Todo keeps it, and implementation follows in a later session.
+**Backlog** — triage {{ issue.identifier }} ($triage), performing the
+route's transition named by the tracker configuration. If it routes to
+Todo, implement it in this same run; otherwise stop.
 
 **Todo / In Progress** — you are working a spec. Read it and its comments,
 then look around the workspace: past sessions leave work behind — build on
@@ -68,7 +67,7 @@ it, don't restart.
     <thead><tr><th>Column</th><th>The verb</th><th>Why</th></tr></thead>
     <tbody>
       <tr><td><code>Ship</code></td><td>Close out — merge, deploy, verify</td><td>Ship <b>is</b> the human's delegation. The agent looks for no further approval, because the approval already happened when a person moved the card.</td></tr>
-      <tr><td><code>Backlog</code></td><td>Triage — draft the brief, route the ticket</td><td>Delegating in Backlog is consent for the whole ride: a clean brief exits to Todo and implementation follows; blanks park the ticket in Needs Decision or Needs Grilling, outside every active state (ADR-0010).</td></tr>
+      <tr><td><code>Backlog</code></td><td>Triage — draft the brief, route the ticket</td><td>Delegating in Backlog is consent for the whole ride: a clean brief is implemented in the same run; blanks park the ticket in Needs Decision or Needs Grilling, outside every active state (ADR-0010).</td></tr>
       <tr><td><code>Todo</code> / <code>In Progress</code></td><td>Work one sub-issue of the spec, then evidence it, then stop</td><td>One bite per session keeps every session in the smart zone; re-dispatch, not a bigger context, is the loop.</td></tr>
       <tr><td>Anything else</td><td>Diagnose and stop</td><td>An unknown column fails loud and safe. No verb is ever improvised from state the prompt does not name.</td></tr>
     </tbody>
