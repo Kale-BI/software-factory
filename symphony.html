@@ -35,10 +35,10 @@
 currently in column **{{ issue.state }}**. Look at your column and act
 accordingly. One session's worth of work, then stop. Never ask a human.
 
-**Ship** — close out {{ issue.identifier }} ($merge-and-deploy). Ship is the
+**Ship** — close out {{ issue.identifier }} (/merge-and-deploy). Ship is the
 human's delegation; look for no further approval.
 
-**Backlog** — triage {{ issue.identifier }} ($triage), performing the
+**Backlog** — triage {{ issue.identifier }} (/triage), performing the
 route's transition named by the tracker configuration. If it routes to
 Todo, implement it in this same run; otherwise stop.
 
@@ -49,15 +49,15 @@ it, don't restart.
 - Every sub-issue Done? Review the diff against the spec, mark the spec PR
   ready for review, move {{ issue.identifier }} to Human Review, and stop.
 - Otherwise pick ONE sub-issue: the first in Todo whose blockers are all
-  Done. Move it to In Progress, then $implement it on the spec's shared
+  Done. Move it to In Progress, then /implement it on the spec's shared
   branch `spec/{{ issue.identifier }}` and draft PR (create both if
   missing). Run the repo's feedback loops; never commit red. Then run
-  $evidence on what you built — the proof comment lands on the sub-issue —
+  /evidence on what you built — the proof comment lands on the sub-issue —
   and move it to Done. Stop.
 - Nothing pickable but open work remains? Comment a diagnosis on
   {{ issue.identifier }} and move it to Blocked.
 - No sub-issues? {{ issue.identifier }} is its own spec: implement it, run
-  $evidence, open its own PR, and move it to Human Review.
+  /evidence, open its own PR, and move it to Human Review.
 
 **Any other column** — you have no verb here. Comment a diagnosis on
 {{ issue.identifier }} and stop.</code></pre>
@@ -74,8 +74,8 @@ it, don't restart.
   </table></div>
   <p>Note what is <i>absent</i>: the prompt never plans and never asks. Triage runs here too now —
     one runner for every session, so failures retry and surface like any other run — but the prompt
-    owns only the choreography: the <code>$triage</code>, <code>$implement</code>, <code>$evidence</code>,
-    and <code>$merge-and-deploy</code> sigils hand off to the <a href="skill-tree.html">skill tree</a>,
+    owns only the choreography: the <code>/triage</code>, <code>/implement</code>, <code>/evidence</code>,
+    and <code>/merge-and-deploy</code> sigils hand off to the <a href="skill-tree.html">skill tree</a>,
     because the choreography is the one fact that varies with this runner and no other. What Slack
     gets each morning is <a href="morning-triage.html">a read-only report</a>, not a runner.</p>
   <div class="callout"><b>The principle underneath:</b> the prompt names only states it has a verb
