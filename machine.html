@@ -57,7 +57,7 @@
     <g class="nd human" data-stage="grilling-tiny"><rect x="90" y="1064" width="200" height="76" rx="10"></rect><text class="t" x="190" y="1094" text-anchor="middle">Grilling</text><text class="s" x="190" y="1116" text-anchor="middle">plan, then build</text></g>
     <g class="nd human" data-stage="grilling"><rect x="305" y="1064" width="200" height="76" rx="10"></rect><text class="t" x="405" y="1094" text-anchor="middle">Grilling</text><text class="s" x="405" y="1116" text-anchor="middle">settle the decisions</text></g>
     <g class="nd human" data-stage="wayfinder"><rect x="520" y="1064" width="200" height="76" rx="10"></rect><text class="t" x="620" y="1094" text-anchor="middle">Wayfinder</text><text class="s" x="620" y="1116" text-anchor="middle">map, grill per ticket</text></g>
-    <g class="nd agent" data-stage="triage"><rect x="735" y="1064" width="200" height="76" rx="10"></rect><text class="t" x="835" y="1094" text-anchor="middle">Triage</text><text class="s" x="835" y="1116" text-anchor="middle">draft the AFK brief</text></g>
+    <g class="nd agent" data-stage="triage"><rect x="735" y="1064" width="200" height="76" rx="10"></rect><text class="t" x="835" y="1094" text-anchor="middle">Triage</text><text class="s" x="835" y="1116" text-anchor="middle">draft the ticket in full</text></g>
     <g class="nd human" data-stage="tospec"><rect x="412" y="914" width="200" height="76" rx="10"></rect><text class="t" x="512" y="944" text-anchor="middle">To-spec</text><text class="s" x="512" y="966" text-anchor="middle">spec + validation gate</text></g>
     <g class="nd neutral" data-stage="brief"><rect x="735" y="924" width="200" height="56" rx="10"></rect><text class="t" x="835" y="958" text-anchor="middle">ready-for-agent</text></g>
     <g class="nd human" data-stage="totickets"><rect x="412" y="784" width="200" height="76" rx="10"></rect><text class="t" x="512" y="814" text-anchor="middle">To-tickets</text><text class="s" x="512" y="836" text-anchor="middle">vertical slices</text></g>
@@ -65,7 +65,7 @@
     <g class="nd agent" data-stage="implement"><rect x="412" y="524" width="200" height="76" rx="10"></rect><text class="t" x="512" y="554" text-anchor="middle">Implement</text><text class="s" x="512" y="576" text-anchor="middle">tdd + code-review</text></g>
     <g class="nd agent" data-stage="evidence"><rect x="412" y="394" width="200" height="76" rx="10"></rect><text class="t" x="512" y="424" text-anchor="middle">Evidence</text><text class="s" x="512" y="446" text-anchor="middle">proof for the gate</text></g>
     <g class="nd human" data-stage="review"><rect x="412" y="264" width="200" height="76" rx="10"></rect><text class="t" x="512" y="294" text-anchor="middle">Human review</text><text class="s" x="512" y="316" text-anchor="middle">evidence on the PR</text></g>
-    <g class="nd agent" data-stage="closeout"><rect x="412" y="134" width="200" height="76" rx="10"></rect><text class="t" x="512" y="164" text-anchor="middle">Close out</text><text class="s" x="512" y="186" text-anchor="middle">merge, deploy, canary</text></g>
+    <g class="nd agent" data-stage="closeout"><rect x="412" y="134" width="200" height="76" rx="10"></rect><text class="t" x="512" y="164" text-anchor="middle">Ship</text><text class="s" x="512" y="186" text-anchor="middle">merge, deploy, canary</text></g>
     <g class="nd agent" data-stage="done"><rect x="452" y="24" width="120" height="56" rx="10"></rect><text class="t" x="512" y="58" text-anchor="middle">Done</text></g>
   </svg></div>
   <div class="detail is-agent" id="detail" role="region" aria-live="polite" aria-label="Selected stage"></div>
@@ -86,7 +86,7 @@ var STAGES = {
     gate:"The way to the destination is clear.", art:"A wayfinder map." },
   inbound: { t:"Inbound ticket", k:"entry", who:"agent", w:"Agent session",
     p:"A bug report, or a ticket an agent filed while working on something else. Enters the machine backwards, through triage.",
-    gate:"Triage has verified the claim and drafted the brief.", art:"The brief, and one of four labels." },
+    gate:"Triage has verified the claim and drafted the ticket in full.", art:"The draft in the effort's artefact, and one of four routes." },
   "grilling-tiny": { t:"Grilling — plan, then build", k:"stage", who:"human", w:"Human in the loop",
     p:"For a tiny idea, specifying it costs more than building it. The same session that settles the decision writes the code, with the human present throughout.",
     gate:"None — it reaches the spine inside the same session.", art:"The commit itself." },
@@ -97,14 +97,14 @@ var STAGES = {
     p:"Charts a big effort as a map of decision tickets, then resolves them one at a time. Deliberately incomplete: what cannot be stated sharply yet stays in fog until the frontier reaches it.",
     gate:"No decisions left before someone can go and build.", art:"Map issue plus one resolution per ticket." },
   triage: { t:"Triage", k:"stage", who:"agent", w:"Agent session",
-    p:"Brief-first: always attempt the full AFK brief, and let the label fall out of where the draft fails. Facts get looked up during triage; only preferences and empirical unknowns reach a human. Runs as Symphony's Backlog lane — see the triage page; a read-only morning report photographs the board.",
-    gate:"A complete brief, or a named blocker in card or agenda form.", art:"The brief, plus one of four waiting-state labels." },
+    p:"Draft-first: always attempt the complete ticket — what to build, the evidence, the plan, the blockers — and let the route fall out of where the draft fails. Facts get looked up during triage; only preferences and empirical unknowns reach a human. Runs as Symphony's Backlog lane — see the triage page; a read-only morning report photographs the board.",
+    gate:"A complete draft, or a named blank in card or agenda form.", art:"The draft in the effort's artefact, plus the route's state on the board." },
   tospec: { t:"To-spec", k:"stage", who:"human", w:"Human in the loop",
     p:"Turns the settled decision into a specification someone who was not in the room could implement.",
     gate:"Validation criteria named, with their evidence kind.", art:"Spec document." },
-  brief: { t:"ready-for-agent", k:"label", who:"agent", w:"Agent session",
-    p:"The label that means principle four is satisfied: the ticket waits for nothing. Deliverable and acceptance criteria are settled, so the work can leave human hands. The only label agents dispatch from.",
-    gate:"Nothing missing.", art:"The brief on the ticket." },
+  brief: { t:"ready-for-agent", k:"route", who:"agent", w:"Agent session",
+    p:"The route that means principle four is satisfied: the ticket waits for nothing. What to build, the evidence a human will accept, the plan and the blockers are all settled, so the work can leave human hands. The only route agents dispatch from.",
+    gate:"Nothing missing.", art:"The ready ticket, and its draft in the artefact." },
   totickets: { t:"To-tickets", k:"stage", who:"human", w:"Human in the loop",
     p:"Slices the spec into tickets, each sized to one session and each carrying its own definition of done.",
     gate:"Every ticket independently dispatchable.", art:"Tickets on the tracker." },
@@ -115,16 +115,16 @@ var STAGES = {
     p:"One ticket, one fresh session, driving tdd and code-review. Work that is discovered gets filed as a new ticket — an implement session never absorbs it.",
     gate:"Tests green and code-review clean.", art:"A pull request." },
   evidence: { t:"Evidence", k:"spine", who:"agent", w:"Agent session",
-    p:"Produces the proof the next gate will read — the validation evidence the spec named in advance. Runs as its own invocation, after implementing, so the judge sits outside the system under test.",
+    p:"Produces the proof the next gate will read — the validation evidence named in advance, one of five kinds. It closes the implement stage, but runs in a sub-agent with fresh context that was not part of the session that wrote the code, so the judge sits outside the system under test.",
     gate:"The named evidence exists and is attached.", art:"The evidence comment on the ticket." },
   review: { t:"Human review", k:"spine", who:"human", w:"The human gate",
     p:"The one stage no runner can stand in for. The evidence named at the previous gate is attached to the PR, and a person reads it.",
     gate:"Approval on the PR.", art:"Review comments." },
-  closeout: { t:"Close out", k:"spine", who:"agent", w:"Agent session, delegated",
+  closeout: { t:"Ship", k:"spine", who:"agent", w:"Agent session, delegated",
     p:"Carries the change past the merge — deploy, then verify in production. Runs only under explicit human delegation, never on its own initiative. Mechanical failures are fixed forward; anything behavioural stops and escalates.",
     gate:"The canary is the evidence.", art:"Deploy log and canary result." },
   done: { t:"Done", k:"spine", who:"agent", w:"Verified",
-    p:"Not merged. Verified in production. For repos whose merge changes no production system, the repo's own delivery doctrine says in advance what shipping means there — and that is the gate.",
+    p:"Not merged. Verified in production. For repos whose merge changes no production system, the repo's own delivery facts say in advance what shipping means there — and that is the gate.",
     gate:"—", art:"The canary." }
 };
 function renderStage(id) {

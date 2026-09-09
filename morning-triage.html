@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Triage and the morning report — The Software Factory</title>
-<meta name="description" content="Symphony triages Kale's backlog as tickets are delegated, drafting the brief each ticket needs. The human wakes up to a one-glance board report, not a pile.">
+<meta name="description" content="Symphony triages Kale's backlog as tickets are delegated, drafting in full the ticket each one has to become. The human wakes up to a one-glance board report, not a pile.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Software Factory">
 <meta property="og:title" content="Triage and the morning report — The Software Factory">
-<meta property="og:description" content="Symphony triages Kale's backlog as tickets are delegated, drafting the brief each ticket needs. The human wakes up to a one-glance board report, not a pile.">
+<meta property="og:description" content="Symphony triages Kale's backlog as tickets are delegated, drafting in full the ticket each one has to become. The human wakes up to a one-glance board report, not a pile.">
 <meta property="og:url" content="https://factory.eatkale.ai/morning-triage.html">
 <meta property="og:image" content="https://factory.eatkale.ai/og.png">
 <meta property="og:image:width" content="1200">
@@ -23,54 +23,79 @@
   <p class="eyebrow">The factory running · 01</p>
   <h1>Triage, and the morning <em>report</em></h1>
   <p class="lede">Delegate a Backlog ticket and <a href="symphony.html">Symphony</a> triages it within
-    the minute, attempting the one thing that reveals what the ticket actually needs: the full AFK
-    brief. The human wakes up to a one-glance board report, not a pile.</p>
+    the minute, attempting the one thing that reveals what the ticket actually needs: writing the
+    ticket out in full. The human wakes up to a one-glance board report, not a pile.</p>
   <div class="rule"></div>
 
-  <h2>Brief-first, not score-first</h2>
+  <h2>Draft-first, not score-first</h2>
   <p>Most triage classifies a ticket as written: read it, guess its size, guess its risk, file it.
-    Ours classifies by <b>drafting</b>. The session always attempts the complete brief — the
-    contract an unattended agent would need: deliverable, validation gate, plan — and the route falls
-    out of <b>where the draft fails</b>. Entanglement between decisions only shows up when you try to
-    write their option lists; scoring never finds it.</p>
-  <p>Before drafting, every open question on the ticket is classified by who holds the answer:</p>
+    Ours classifies by <b>drafting</b>. The session always attempts the complete ticket — what to
+    build from the user's side, the evidence a human will accept, the plan and the facts it rests on,
+    the blockers — and the route falls out of <b>where the draft fails</b>. Entanglement between
+    decisions only shows up when you try to write their option lists; scoring never finds it.</p>
+  <p>The claim is verified first: the bug reproduced, or the behaviour confirmed absent, so the ticket
+    is triaged as understood rather than as written. Then every open question is classified by who
+    holds the answer:</p>
   <ul>
     <li><b>Fact</b> — the world holds it (API capability, library behaviour, existing code). Looked up
-      during triage, against primary sources, and cited in the brief.</li>
+      during triage, against primary sources, and cited in the draft.</li>
     <li><b>Preference</b> — the maintainer holds it. Carried forward to routing.</li>
     <li><b>Empirical</b> — nobody holds it yet. A prototype answers it.</li>
   </ul>
   <div class="callout"><b>The discipline:</b> a question answerable from documentation that reaches a
     human is a triage bug — the maintainer's attention was spent to save the agent a lookup.</div>
 
+  <h2>Has this been asked before?</h2>
+  <p>Before drafting, the session searches the tracker for the ticket's <b>concept</b> and not its
+    wording — the glossary term, the synonyms the glossary avoids, the area of code — across every
+    state, closed ones included, and reads the decision records for the area. Where it looked goes in
+    the comment. What it finds can end the triage in one of three places, and they are deliberately
+    three rather than one, so a later search can tell a deliberate no from a never-was:</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>What the search finds</th><th>How the ticket closes</th></tr></thead>
+    <tbody>
+      <tr><td>An open ticket asking for the same thing</td><td><b>Duplicate</b> of the survivor. The older ticket wins; anything only the newer one said moves onto it as a comment. The survivor is triaged only when asked.</td></tr>
+      <tr><td>The ask was declined on purpose, on a ticket or in a decision record's rejected alternatives</td><td>Not the session's call. It routes <code>needs-decision</code> with one card — the earlier no and its reason, A) still no, B) reconsider. "Still no" marks this ticket a duplicate of the declined one; "reconsider" resumes the draft with the old reason cited as a fact.</td></tr>
+      <tr><td>A closed ticket already did it, or found it invalid</td><td><b>Done</b> or <b>Canceled</b>, with the evidence in the closing comment.</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Not Planned is the record of what the project chose not to do.</b> One ticket per declined ask,
+    the reason in its closing comment written to outlive the moment — what was asked, why not, and
+    what would change the answer — and later tickets asking the same thing marked duplicates of it, so
+    one ticket accretes the whole history of the ask. "Too busy" is a deferral, not a decline; that
+    ticket stays open and untriaged.</p>
+
   <h2>Four routes, rendered as columns</h2>
   <p>A route is a claim about what the ticket <b>waits for</b> — never about what anyone is currently
     doing to it. On Kale's board each route is a <b>state</b>, so the board itself shows what every
-    ticket awaits; there are no triage labels. Untriaged work sits in Backlog.</p>
+    ticket awaits; no route is ever a label. Untriaged work sits in Backlog.</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Route</th><th>The ticket waits for</th><th>Where it lands</th></tr></thead>
     <tbody>
-      <tr><td><code>ready-for-agent</code></td><td><b>Nothing.</b> An AFK session can start from the attached brief.</td><td><b>Todo</b>, delegation kept — implementation follows unattended</td></tr>
-      <tr><td><code>ready-for-human</code></td><td><b>Human execution.</b> The brief is complete, but a step of the plan needs a person.</td><td><b>Todo</b>, handed back — delegation removed, creator tagged</td></tr>
-      <tr><td><code>needs-decision</code></td><td><b>One reply.</b> Every open decision fits a card the maintainer can answer from their phone.</td><td><b>Needs Decision</b>, with the card</td></tr>
-      <tr><td><code>needs-grilling</code></td><td><b>A session.</b> The open questions are entangled or open-form.</td><td><b>Needs Grilling</b>, with the agenda</td></tr>
+      <tr><td><code>ready-for-agent</code></td><td><b>Nothing.</b> An AFK session can start from the ticket as drafted.</td><td><b>Todo</b>, delegation kept — implementation follows unattended</td></tr>
+      <tr><td><code>ready-for-human</code></td><td><b>Human execution.</b> The draft is complete, but a step of it needs a credential, account or device the unattended runner does not hold.</td><td><b>Todo</b>, handed back — delegation removed, creator tagged</td></tr>
+      <tr><td><code>needs-decision</code></td><td><b>One reply.</b> Every open blank fits a card the maintainer can answer from their phone.</td><td><b>Needs Decision</b>, with the card</td></tr>
+      <tr><td><code>needs-grilling</code></td><td><b>A session.</b> The open questions are entangled or open-form; the agenda seeds the grilling.</td><td><b>Needs Grilling</b>, with the agenda</td></tr>
     </tbody>
   </table></div>
+  <p>Where a route lands, and which transition it performs, is the tracker's business and not the
+    skill's. When the runner needs none of the human-only steps to build the thing, that step is split
+    into a ticket of its own so the build still runs unattended.</p>
   <p>Delegating in Backlog is consent for the whole ride: a ticket that triages clean proceeds through
-    implementation to Human Review, where the evidence contract is the gate. Resuming a parked ticket
-    is one drag — answer the card or hold the session, then move it to Backlog (re-triage reads the
-    reply) or straight to Todo. Ties break toward grilling: a wrongly-carded ticket gets built
-    confidently wrong, which costs more than a session.</p>
+    implementation to Human Review, where the evidence contract is the gate. Otherwise the ticket
+    advances past its route only on a reply, a session, or an explicit directive — and resuming is one
+    drag: answer the card or hold the session, then move it to Backlog (re-triage reads the reply) or
+    straight to Todo. Ties break toward grilling: a wrongly-carded ticket gets built confidently
+    wrong, which costs more than a session.</p>
 
   <h2>The closed-form test</h2>
-  <p>A blank in the brief qualifies for a decision card only if all five hold. Fail any one and the
+  <p>A blank in the draft qualifies for a decision card only if all four hold. Fail any one and the
     ticket goes to grilling instead:</p>
   <div class="prin">
     <div><span class="n">01</span><span><b>Enumerable.</b><span class="d">You can list 2–4 options and would execute any of them verbatim, happily. Prose options for a visual question fail this; a variants prototype makes them pass.</span></span></div>
     <div><span class="n">02</span><span><b>Independent.</b><span class="d">The answer leaves every other blank's options unchanged.</span></span></div>
-    <div><span class="n">03</span><span><b>Named.</b><span class="d">Every term the question leans on has one settled meaning in the project's domain model. When different readings of a term produce different tickets, the vocabulary needs a session before the decision does.</span></span></div>
-    <div><span class="n">04</span><span><b>Few.</b><span class="d">At most two blanks on the ticket. More is a conversation wearing a form's clothes.</span></span></div>
-    <div><span class="n">05</span><span><b>Recoverable.</b><span class="d">A wrong pick is cheap to reverse. Schema migrations, public API shapes, pricing go to grilling even as a single clean question — the point is stress-testing the reasoning, not picking.</span></span></div>
+    <div><span class="n">03</span><span><b>Few.</b><span class="d">At most two blanks on the ticket. More is a conversation wearing a form's clothes.</span></span></div>
+    <div><span class="n">04</span><span><b>Recoverable.</b><span class="d">A wrong pick is cheap to reverse. Schema migrations, public API shapes, pricing go to grilling even as a single clean question — the point is stress-testing the reasoning, not picking.</span></span></div>
   </div>
 
   <h2>Prototypes, during triage</h2>
@@ -84,11 +109,12 @@
     nobody with taste is present, so taste can be exercised later in one reply.</p>
 
   <h2>Where the words go</h2>
-  <p>The ticket's content — draft brief, and later the spec that supersedes it — lives at the
-    effort's <b>long-form home</b>, one HTML document per effort in the dossiers site, created lazily
-    and linked from the ticket. The ticket description stays its author's; the comment stays a
-    glance. Every comment the session posts opens with <i>"Generated by AI during triage."</i> — a
-    stranger reading the tracker always knows which voice is speaking.</p>
+  <p>The draft — and later the spec that supersedes it — lives in the effort's <b>artefact</b>: one
+    HTML page per effort, created lazily the first time there is something long-form to write, and
+    linked from the ticket. The ticket description stays its author's; the comment stays a glance,
+    with only the decision card or the grilling agenda inline, because those are written to be
+    answered from a phone. Every comment the session posts opens with <i>"Generated by AI during
+    triage."</i> — a stranger reading the tracker always knows which voice is speaking.</p>
 
   <h2>The morning report</h2>
   <p>Every weekday morning at 07:30 London time, a scheduler on an always-on machine fires one script. It is

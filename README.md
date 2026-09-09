@@ -13,14 +13,14 @@ The site renders the team's process records, which live with the code they gover
 | Page | Source of truth |
 |---|---|
 | The machine, foundations, actors | the engineering-process decision record in the skillset repo |
-| The morning triage | the `triage` skill and the triage cron's prompt |
-| Symphony | the dispatcher's `prompt.md` and its decision records |
-| The board | the board configuration and the label decisions |
-| The skill tree | the skill-tree architecture decision record |
-| Evidence and dossiers | the `writing-for-humans` conventions |
+| The morning triage | the `triage` skill and the morning report's script |
+| Symphony | the dispatcher's `prompt.md`, its decision records, and the `symphony-run` skill |
+| The board | the board configuration and the tracker instructions' state mapping |
+| The skill tree | the skill-tree decision records and the skillset's own skill tables |
+| Evidence and dossiers | the tracker and artefact instructions the setup skill seeds into each repo |
 
 When a source changes, the page rendering it must change in the same effort. The internal
-map for this obligation lives in the skillset repo's `CONTEXT.md`.
+map for this obligation lives in the skillset repo's `docs/factory-map.md`.
 
 ## Redaction
 

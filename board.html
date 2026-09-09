@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The board — The Software Factory</title>
-<meta name="description" content="The exact semantics of Kale's board: every column means something precise, and every label is a claim about what a ticket waits for.">
+<meta name="description" content="The exact semantics of Kale's board: every column means something precise, and every parked column is a claim about what a ticket waits for.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Software Factory">
 <meta property="og:title" content="The board — The Software Factory">
-<meta property="og:description" content="The exact semantics of Kale's board: every column means something precise, and every label is a claim about what a ticket waits for.">
+<meta property="og:description" content="The exact semantics of Kale's board: every column means something precise, and every parked column is a claim about what a ticket waits for.">
 <meta property="og:url" content="https://factory.eatkale.ai/board.html">
 <meta property="og:image" content="https://factory.eatkale.ai/og.png">
 <meta property="og:image:width" content="1200">
@@ -35,10 +35,13 @@
       <tr><td><code>Needs Decision</code></td><td>Waits for one reply</td><td>A decision card answerable from a phone; answer, then drag to Backlog or Todo</td></tr>
       <tr><td><code>Todo</code></td><td>Ready to go, by whoever is tagged</td><td>Delegated &rarr; an agent implements; handed back &rarr; a person's task, exactly as a colleague would</td></tr>
       <tr><td><code>In Progress</code></td><td>An agent is working</td><td>&mdash;</td></tr>
-      <tr><td><code>Human Review</code></td><td>The human gate</td><td>PR ready, evidence posted; a person opens the gate by delegating close-out</td></tr>
+      <tr><td><code>Human Review</code></td><td>The human gate</td><td>Spec sign-off, or PR review once a PR is linked; a person opens the gate by moving the ticket to Ship</td></tr>
       <tr><td><code>Ship</code></td><td>Landing in progress</td><td>Never parked — a ticket never sits in Ship with nobody working it</td></tr>
       <tr><td><code>Blocked</code></td><td>An implementation that cannot proceed</td><td>Always carries the agent's diagnosis; never a triage destination</td></tr>
-      <tr><td><code>Done</code></td><td>Verified in production</td><td>Not merely merged; for repos with no deploy, the repo's delivery doctrine names its terminal evidence in advance</td></tr>
+      <tr><td><code>Done</code></td><td>Verified in production</td><td>Not merely merged; for repos with no deploy, the repo's own delivery facts name its terminal evidence in advance</td></tr>
+      <tr><td><code>Duplicate</code></td><td>The same ask, already open elsewhere</td><td>Points at the survivor, which is the older ticket; anything only this one said moved onto it first</td></tr>
+      <tr><td><code>Not Planned</code></td><td>A deliberate no</td><td>One ticket per declined ask, the reason in its closing comment, later asks marked duplicates of it — so one ticket accretes the history</td></tr>
+      <tr><td><code>Canceled</code></td><td>Invalid, or never was</td><td>Kept distinct from Not Planned so a search can tell a deliberate no from a never-was</td></tr>
     </tbody>
   </table></div>
   <div class="callout"><b>What is not here matters too.</b> A state no stage reads is a state the
@@ -49,8 +52,8 @@
   <p>Triage's four routes &mdash; <code>ready-for-agent</code>, <code>ready-for-human</code>,
     <code>needs-decision</code>, <code>needs-grilling</code> &mdash; are claims about what the ticket
     <b>waits for</b>, never about what anyone is doing to it. On this board each route <b>is</b> a
-    column, so the board answers the question by itself and there are no waiting-state labels. The
-    full routing logic &mdash; how a route falls out of drafting the brief, and the five-clause test
+    column, so the board answers the question by itself and no route is ever a label. The
+    full routing logic &mdash; how a route falls out of drafting the ticket, and the four-clause test
     that separates a card from a session &mdash; is on
     <a href="morning-triage.html">the triage page</a>.</p>
 

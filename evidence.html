@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Evidence and dossiers — The Software Factory</title>
-<meta name="description" content="How Kale keeps a tracker full of agents legible to humans: one-breath glances, long-form dossiers, and proof gating every transition.">
+<meta name="description" content="How Kale keeps a tracker full of agents legible to humans: one-breath glances, one long-form artefact per effort, and proof gating every transition.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Software Factory">
 <meta property="og:title" content="Evidence and dossiers — The Software Factory">
-<meta property="og:description" content="How Kale keeps a tracker full of agents legible to humans: one-breath glances, long-form dossiers, and proof gating every transition.">
+<meta property="og:description" content="How Kale keeps a tracker full of agents legible to humans: one-breath glances, one long-form artefact per effort, and proof gating every transition.">
 <meta property="og:url" content="https://factory.eatkale.ai/evidence.html">
 <meta property="og:image" content="https://factory.eatkale.ai/og.png">
 <meta property="og:image:width" content="1200">
@@ -23,8 +23,8 @@
   <p class="eyebrow">Reference · 03</p>
   <h1>Evidence and <em>dossiers</em></h1>
   <p class="lede">A tracker where agents do most of the writing drowns in report-dumps unless
-    legibility is engineered. Ours is engineered around three ideas: the glance, the long-form home,
-    and evidence named in advance.</p>
+    legibility is engineered. Ours is engineered around three ideas: the glance, the artefact, and
+    evidence named in advance.</p>
   <div class="rule"></div>
 
   <h2>The glance</h2>
@@ -37,28 +37,44 @@
     reads it once and knows what happened and what, if anything, they owe. A wall of text fails even
     when every sentence in it is true.</div>
 
-  <h2>The long-form home</h2>
-  <p>Long-form records — grilling records, plans, accumulated evidence — do not go in comments. Each
-    effort has one accreting long-form page at the team's internal, access-walled dossier site; every
-    resolved decision appends a dated entry, and the tracker keeps the glance plus a link. One page
-    per effort, not per ticket, so the story of a feature reads top to bottom in one place.</p>
+  <h2>The artefact</h2>
+  <p>Long-form records — grilling records, specs, plans, accumulated evidence — do not go in comments.
+    Each effort has one accreting page, its <b>artefact</b>, named after the effort and never after a
+    ticket: tickets are plural and get renumbered, the effort is one thing. The top of the page is the
+    current contract — what to build, the evidence, the plan — and below it sits one section per
+    stage, each with a stable anchor so a ticket can link the part that concerns it. A stage already
+    written is a record of what was believed at the time, so corrections are dated entries and never
+    edits to history. The tracker keeps the glance plus the link.</p>
+  <p>Where the page lives varies per repo, and the repo's own seeded instructions say which: a file in
+    the repo, for work read from a checkout; a Claude artefact, for a link shared in a hurry; or a
+    published site, for colleagues who need a URL that renders. Kale's is an internal, access-walled
+    dossier site. What does not vary is that it is HTML — the reader is a person, and a rendered page
+    is read in a fraction of the time a markdown wall is.</p>
   <p>The split is an <b>audience seam</b>, and it decides format. Artifacts agents consume — specs,
-    briefs, decision records, glossaries — are markdown in the repo: versioned, diffable, readable by
-    a session with no browser. Artifacts humans read long-form are HTML at the dossier, because HTML
-    beats markdown for human reading. The process itself never cares what evidence is marked up in;
-    that doctrine lives in a writing skill, where format decisions belong.</p>
+    decision records, glossaries — are markdown in the repo: versioned, diffable, readable by a
+    session with no browser. Artifacts humans read long-form are HTML at the artefact. The process
+    itself never cares what evidence is marked up in; that doctrine is seeded into each repo, read
+    once at the start of a session rather than carried around as a shared skill every session
+    re-reads.</p>
 
   <h2>Evidence, named in advance</h2>
   <p>Every gate in <a href="machine.html">the machine</a> names its evidence kind before the work
-    starts. A spec's validation gate says what a human will look at to say "yes, it works" — a
-    screenshot, a tried-it note, a preview link — and it is deliberately <i>not</i> a passing test
-    suite. Done's evidence is the canary: proof the deployed change works in production, not proof
-    the deploy pipeline went green.</p>
-  <p>The evidence stage runs as its own invocation, after implementing, so the judge sits outside the
-    system under test. And repos whose merge changes no production system declare, in their own
-    delivery doctrine, what shipping means there — one repo here ships by a one-line team announcement
-    posted only <i>after</i> its canary, because the message claims the change is live and the claim
-    has to be true first.</p>
+    starts, and there are five kinds to name: a screenshot or GIF, a terminal transcript, a query and
+    its rows, a test run, a live URL. A spec's validation gate says which of them a human will look at
+    to say "yes, it works", and a passing test suite on its own is deliberately <i>not</i> an answer.
+    Done's evidence is the canary: proof the deployed change works in production, not proof the deploy
+    pipeline went green.</p>
+  <p>Evidence is the closing act of implementing, but it is produced in a sub-agent with fresh context
+    that was not part of the session that wrote the code, so the judge sits outside the system under
+    test. Where a named kind cannot be produced, the comment says which and why rather than
+    substituting another. At spec level the same rule takes a shape: every breakdown of a spec ends
+    with a verify ticket, blocked by all the others, whose whole deliverable is the feature's evidence
+    posted on the spec. If that proof cannot be produced, the spec is not done — and because human
+    review happens on the ticket a human opened, the sub-issues go straight to Done.</p>
+  <p>Repos whose merge changes no production system declare, in their own delivery facts, what
+    shipping means there — one repo here ships by a one-line team announcement posted only
+    <i>after</i> its canary, because the message claims the change is live and the claim has to be
+    true first.</p>
 
   <h2>Why this is a process concern at all</h2>
   <p>Principle two says the tracker is the system of record; this page is what makes that record worth
@@ -67,7 +83,7 @@
     read — is how one system of record serves both.</p>
 
   <footer><span class="k">Kale · the process is the product's floor plan</span>
-    <span>Generated from the team's writing conventions</span></footer>
+    <span>Generated from the tracker and artefact instructions each repo is seeded with</span></footer>
 </div>
 </body>
 </html>

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The skill tree — The Software Factory</title>
-<meta name="description" content="Kale's twenty-two agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
+<meta name="description" content="Kale's twenty agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Software Factory">
 <meta property="og:title" content="The skill tree — The Software Factory">
-<meta property="og:description" content="Kale's twenty-two agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
+<meta property="og:description" content="Kale's twenty agent skills, admitted by reference and placed by variance — derived from the process, not accumulated.">
 <meta property="og:url" content="https://factory.eatkale.ai/skill-tree.html">
 <meta property="og:image" content="https://factory.eatkale.ai/og.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
   <a class="back" href="index.html">&#8592; all pages</a>
   <p class="eyebrow">Reference · 02</p>
   <h1>The skill <em>tree</em></h1>
-  <p class="lede">Twenty-two skills run the machine. Each one is here because something in the system
+  <p class="lede">Twenty skills run the machine. Each one is here because something in the system
     references it — and for no other reason.</p>
   <div class="rule"></div>
 
@@ -36,24 +36,24 @@
     references it — another skill, a seeded doc, a runner's prompt, or a cron. A skill that is merely
     useful goes to a personal library instead. Usefulness is not membership, and "we might want it
     someday" is the exact argument the rule exists to refuse. Applying it cut the tree to
-    twenty-two.</p>
+    twenty-two, and the version after that to twenty.</p>
 
   <h2>The tree</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>Class</th><th>Skills</th><th>Admitted because</th></tr></thead>
     <tbody>
       <tr><td><b>Spine stages &amp; entries</b></td>
-        <td><code>grilling</code> <code>wayfinder</code> <code>triage</code> <code>to-spec</code> <code>to-tickets</code> <code>implement</code> <code>evidence</code> <code>merge-and-deploy</code></td>
+        <td><code>grill-me</code> <code>wayfinder</code> <code>to-spec</code> <code>to-tickets</code> <code>triage</code> <code>implement</code> <code>tdd</code> <code>code-review</code> <code>ship</code></td>
         <td>Each is a stage of <a href="machine.html">the machine</a></td></tr>
       <tr><td><b>Invoked by the spine</b></td>
-        <td><code>tdd</code> <code>code-review</code> <code>diagnosing-bugs</code> <code>resolving-merge-conflicts</code> <code>domain-modeling</code> <code>prototype</code> <code>research</code> <code>grill-with-docs</code> <code>codebase-design</code> <code>improve-codebase-architecture</code> <code>writing-for-agents</code></td>
+        <td><code>domain-modeling</code> <code>research</code> <code>prototype</code> <code>diagnosing-bugs</code> <code>resolving-merge-conflicts</code> <code>codebase-design</code> <code>improve-codebase-architecture</code></td>
         <td>A spine skill calls them by name</td></tr>
       <tr><td><b>Reference skills</b></td>
-        <td><code>brief</code> <code>writing-for-humans</code></td>
+        <td><code>writing-for-agents</code></td>
         <td>The single home of an org-wide fact, consumed as <code>$name</code> by other skills</td></tr>
-      <tr><td><b>Setup</b></td>
-        <td><code>setup-engineering-workflow</code></td>
-        <td>Seeds each repo's per-repo configuration</td></tr>
+      <tr><td><b>Setup and shorthand</b></td>
+        <td><code>setup-engineering-workflow</code> <code>grill-me-with-docs</code> <code>symphony-run</code></td>
+        <td>Seeded per-repo configuration, and the entries a human or a runner types</td></tr>
     </tbody>
   </table></div>
 
@@ -62,7 +62,8 @@
     that repo, written by the setup skill. Shared across the org → a reference skill. Varies per
     machine or runner → the runtime that owns it, whether that is a dispatcher's config or a personal
     agent library. Skills are interfaces; a skill carrying a fact from the wrong class is misplaced
-    configuration wearing a skill's clothes.</p>
+    configuration wearing a skill's clothes. The reference class is the narrowest of the four, and it
+    has since shrunk to one member — see below.</p>
   <p>The rule predicts things. When the stuck column was renamed on the board, the rename touched four
     repos' configuration files and <b>zero skills</b> — exactly what placement-by-variance says
     should happen, because a column's name varies per tracker and no skill should ever have held
@@ -72,21 +73,51 @@
   <ul>
     <li><b>Two "unused" skills were kept and wired instead of killed</b> — they were unreferenced, but
       the reference was genuinely missing rather than the skill: implement now calls the debugging
-      skill when a failure resists explanation, and close-out calls the merge-conflict skill when a
-      merge conflicts.</li>
+      skill when a failure resists explanation, and <code>ship</code> calls the merge-conflict skill
+      when a merge conflicts.</li>
     <li><b>One skill was born from the cut:</b> <code>brief</code>, the reference skill owning the
       agent-ready contract that three other skills had each been restating. One responsibility, one
       home.</li>
     <li><b>One skill was reclassified rather than moved:</b> <code>evidence</code> looked like a
-      helper, but it is the spine stage between implement and human review — and it deliberately runs
-      as its own step so the judge sits outside the system under test.</li>
+      helper, but it was made a spine stage between implement and human review, on the argument that
+      the judge should sit outside the system under test.</li>
   </ul>
+  <p>The last two turned out to be the same mistake, and the next version undid both.</p>
+
+  <h2>What version four corrected</h2>
+  <p>Three faults traced back to one cause. Unattended runs stalled on tickets carrying no plan and
+    none of the facts triage had verified. Grilling sessions jumped straight to specs, because the
+    placement rule in <code>writing-for-humans</code> redefined a grilling session's output as a
+    brief. And repos accumulated an effort-agnostic decisions file that grew without bound, because it
+    was the only home a grilling record had. In each case a Kale-wide doctrine sat in a reference
+    skill that every session re-read, and the indirection through <code>$brief</code> and
+    <code>$writing-for-humans</code> quietly changed what the calling skill meant.</p>
+  <p>So the doctrine moved to where it is read once: the files the setup skill seeds into each repo.
+    The tracker instructions now carry how to write on that tracker and what a ready ticket contains —
+    the five evidence kinds and the follow-up shape included — and a new artefact document names where
+    the effort's long-form record lives, seeded from three hosts: a file in the repo, a Claude
+    artefact, a published site. Every engineering skill opens with one sentence pointing at the
+    tracker instructions, and the flow skills shrank below their upstream size while the seeds
+    grew.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Change</th><th>Skills</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><b>Deleted</b></td><td><code>brief</code> <code>evidence</code> <code>writing-for-humans</code></td><td>Each held doctrine that belongs in the per-repo seeds, where a session reads it once</td></tr>
+      <tr><td><b>Renamed</b></td><td><code>grilling</code> → <code>grill-me</code>, <code>grill-with-docs</code> → <code>grill-me-with-docs</code></td><td>Back to upstream's split, so the drift we own is the content and not the names</td></tr>
+      <tr><td><b>Renamed</b></td><td><code>merge-and-deploy</code> → <code>ship</code></td><td>The verb the board's Ship state already named. Its delivery seed folded away with it: close-out facts became bullets in the repo's agent-skills block</td></tr>
+      <tr><td><b>Added</b></td><td><code>symphony-run</code></td><td>The dispatcher's lane, moved out of the runner's prompt — the lane names skills, so it belongs in the same versioned unit as the skills it names</td></tr>
+    </tbody>
+  </table></div>
+  <p>Evidence did not stop existing; it stopped being a skill. It is the closing paragraph of
+    <code>implement</code>, produced in a sub-agent with fresh context that was not part of the
+    session that wrote the code — which is what "the judge sits outside the system under test" always
+    required. A separate context, not a separate skill.</p>
   <div class="callout"><b>The quiet rule underneath:</b> the tree is derived from the process, so its
     size is a consequence, not a target. If the process grows a stage, the tree grows a skill; nothing
     else grows it.</div>
 
   <footer><span class="k">Kale · the process is the product's floor plan</span>
-    <span>Generated from the skill tree's decision record</span></footer>
+    <span>Generated from the skill tree's decision records and the skillset's own tables</span></footer>
 </div>
 </body>
 </html>
