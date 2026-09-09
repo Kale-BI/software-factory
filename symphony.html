@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Symphony — The Software Factory</title>
-<meta name="description" content="Kale's dispatcher: one unconditional prompt — read your column, act accordingly — published verbatim.">
+<meta name="description" content="Kale's dispatcher: a three-sentence prompt that names the issue, the column and the lane skill — published verbatim.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Software Factory">
 <meta property="og:title" content="Symphony — The Software Factory">
-<meta property="og:description" content="Kale's dispatcher: one unconditional prompt — read your column, act accordingly — published verbatim.">
+<meta property="og:description" content="Kale's dispatcher: a three-sentence prompt that names the issue, the column and the lane skill — published verbatim.">
 <meta property="og:url" content="https://factory.eatkale.ai/symphony.html">
 <meta property="og:image" content="https://factory.eatkale.ai/og.png">
 <meta property="og:image:width" content="1200">
@@ -23,67 +23,50 @@
   <p class="eyebrow">The factory running · 02</p>
   <h1>Symphony, the <em>dispatcher</em></h1>
   <p class="lede">Symphony is the runner that launches an agent session on a delegated ticket. It is
-    not the brain — everything below the verb lives in the skill tree — and its whole dispatch
-    contract fits in one prompt, published here verbatim.</p>
+    not the brain — everything below the verb lives in the skill tree, the lane included — and what
+    remains of it fits in three sentences, published here verbatim.</p>
   <div class="rule"></div>
 
-  <h2>One text, no branching</h2>
-  <p>The prompt is one unconditional text: it names the issue and its column, and the <b>agent</b>
-    reads the column and acts. One session's worth of work per dispatch, then stop; re-dispatch is
-    the loop.</p>
-  <pre><code>You are Symphony, dispatched unattended on Linear issue {{ issue.identifier }},
-currently in column **{{ issue.state }}**. Look at your column and act
-accordingly. One session's worth of work, then stop. Never ask a human.
+  <h2>Three sentences, no branching</h2>
+  <p>The prompt keeps exactly what a skill cannot know: which issue, which column, and the fact that
+    nobody is watching. Then it calls the lane by name.</p>
+  <pre><code>You are Symphony, dispatched unattended on Linear issue {{ issue.identifier }}, currently in column **{{ issue.state }}**. Never ask a human. $symphony-run.</code></pre>
 
-**Ship** — close out {{ issue.identifier }} ($merge-and-deploy). Ship is the
-human's delegation; look for no further approval.
+  <h2>The lane is a skill</h2>
+  <p>Everything the prompt used to spell out — the column verbs, the one-sub-issue choreography, the
+    branch and pull-request shape, the parking rules — is now <code>symphony-run</code>, a skill in
+    <a href="skill-tree.html">the tree</a>. The lane names skills and sequences them, so it is a
+    <i>client</i> of the tree's interface, and it kept changing for reasons that were entirely the
+    tree's: a stage folded into another stage, a new rule for the follow-ups an unattended run files.
+    Each such change was two pull requests in two repos with two deploy paths and no version pin
+    between them, and skew in either direction dispatches a run that names a skill which no longer
+    exists. Moving the lane into the skill tree puts the caller in the same versioned unit as the
+    interface it consumes; they now deploy together.</p>
+  <p>The lane itself is still one unconditional text: read your column, act accordingly, one session's
+    worth of work, then stop. Re-dispatch is the loop. Follow-ups the run files are delegated to
+    Symphony as they are created — no human is here to queue them, so triage is the gate.</p>
 
-**Backlog** — triage {{ issue.identifier }} ($triage), performing the
-route's transition named by the tracker configuration. If it routes to
-Todo, implement it in this same run; otherwise stop.
-
-**Todo / In Progress** — you are working a spec. Read it and its comments,
-then look around the workspace: past sessions leave work behind — build on
-it, don't restart.
-
-- Every sub-issue Done? Review the diff against the spec, mark the spec PR
-  ready for review, move {{ issue.identifier }} to Human Review, and stop.
-- Otherwise pick ONE sub-issue: the first in Todo whose blockers are all
-  Done. Move it to In Progress, then $implement it on the spec's shared
-  branch `spec/{{ issue.identifier }}` and draft PR (create both if
-  missing). Run the repo's feedback loops; never commit red. Then run
-  $evidence on what you built — the proof comment lands on the sub-issue —
-  and move it to Done. Stop.
-- Nothing pickable but open work remains? Comment a diagnosis on
-  {{ issue.identifier }} and move it to Blocked.
-- No sub-issues? {{ issue.identifier }} is its own spec: implement it, run
-  $evidence, open its own PR, and move it to Human Review.
-
-**Any other column** — you have no verb here. Comment a diagnosis on
-{{ issue.identifier }} and stop.</code></pre>
-
-  <h2>What each line is doing</h2>
+  <h2>What the lane does in each column</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>Column</th><th>The verb</th><th>Why</th></tr></thead>
     <tbody>
-      <tr><td><code>Ship</code></td><td>Close out — merge, deploy, verify</td><td>Ship <b>is</b> the human's delegation. The agent looks for no further approval, because the approval already happened when a person moved the card.</td></tr>
-      <tr><td><code>Backlog</code></td><td>Triage — draft the brief, route the ticket</td><td>Delegating in Backlog is consent for the whole ride: a clean brief is implemented in the same run; blanks park the ticket in Needs Decision or Needs Grilling, outside every active state (ADR-0010).</td></tr>
-      <tr><td><code>Todo</code> / <code>In Progress</code></td><td>Work one sub-issue of the spec, then evidence it, then stop</td><td>One bite per session keeps every session in the smart zone; re-dispatch, not a bigger context, is the loop.</td></tr>
-      <tr><td>Anything else</td><td>Diagnose and stop</td><td>An unknown column fails loud and safe. No verb is ever improvised from state the prompt does not name.</td></tr>
+      <tr><td><code>Ship</code></td><td>Land it with <code>$ship</code> — merge, deploy, verify</td><td>Ship <b>is</b> the human's delegation. The agent looks for no further approval, because the approval already happened when a person moved the card.</td></tr>
+      <tr><td><code>Backlog</code></td><td>Triage — draft the ticket in full, then perform the route's transition</td><td>Delegating in Backlog is consent for the whole ride: a ticket that triages clean is implemented in the same run; blanks park it in Needs Decision or Needs Grilling, outside every active state.</td></tr>
+      <tr><td><code>Todo</code> / <code>In Progress</code></td><td>Work one sub-issue of the spec on its shared branch, then stop</td><td>One bite per session keeps every session in the smart zone; re-dispatch, not a bigger context, is the loop. Every sub-issue Done means the spec goes to Human Review.</td></tr>
+      <tr><td>Anything else</td><td>Diagnose and stop</td><td>An unknown column fails loud and safe. No verb is ever improvised from a state the lane does not name.</td></tr>
     </tbody>
   </table></div>
-  <p>Note what is <i>absent</i>: the prompt never plans and never asks. Triage runs here too now —
-    one runner for every session, so failures retry and surface like any other run — but the prompt
-    owns only the choreography: the <code>$triage</code>, <code>$implement</code>, <code>$evidence</code>,
-    and <code>$merge-and-deploy</code> sigils hand off to the <a href="skill-tree.html">skill tree</a>,
-    because the choreography is the one fact that varies with this runner and no other. What Slack
-    gets each morning is <a href="morning-triage.html">a read-only report</a>, not a runner.</p>
-  <div class="callout"><b>The principle underneath:</b> the prompt names only states it has a verb
+  <p>Note what is <i>absent</i>: the prompt never plans, never asks, and now never chooses either.
+    Triage runs here too — one runner for every session, so failures retry and surface like any other
+    run — but no fact about which skill runs when lives in this repo any more. Editing the prompt is
+    no longer how a run's behaviour changes. What Slack gets each morning is
+    <a href="morning-triage.html">a read-only report</a>, not a runner.</p>
+  <div class="callout"><b>The principle underneath:</b> the lane names only states it has a verb
     for, and machinery is added against observed failures, never speculative ones. A board state no
     human touches is a state the process cannot explain.</div>
 
   <footer><span class="k">Kale · the process is the product's floor plan</span>
-    <span>Generated from the dispatcher's prompt and its decision records</span></footer>
+    <span>Generated from the dispatcher's prompt, its decision records, and the lane skill</span></footer>
 </div>
 </body>
 </html>
