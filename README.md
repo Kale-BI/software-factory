@@ -1,8 +1,8 @@
 # The Software Factory
 
-The public site describing how Kale runs engineering with a small team and a large number of
+The public site describing how Redkale runs engineering with a small team and a large number of
 agent sessions — the process, the board, the skill tree, and the actual prompts, published in
-full. Live at [factory.eatkale.ai](https://factory.eatkale.ai).
+full. Live at [factory.redkale.ai](https://factory.redkale.ai).
 
 Plain HTML, no build step: edit a page, push to `main`, GitHub Pages serves it.
 

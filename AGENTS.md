@@ -1,6 +1,6 @@
 # Software Factory — agent instructions
 
-The public site describing how Kale runs engineering; `README.md` says what each page renders and where its source of truth lives. Plain HTML, no build step.
+The public site describing how Redkale runs engineering; `README.md` says what each page renders and where its source of truth lives. Plain HTML, no build step.
 
 ## Agent skills
 
@@ -10,7 +10,7 @@ Linear, project **Agents** on the **Engineering** team, identifiers `ENG-123`; o
 
 ### Artefact
 
-The effort's page on the dossiers site (`Kale-BI/dossiers`, served at dossiers.eatkale.ai). See `docs/agents/artefact.md`.
+The effort's page on the dossiers site (`Kale-BI/dossiers`, served at dossiers.redkale.ai). See `docs/agents/artefact.md`.
 
 ### Domain docs
 
@@ -22,9 +22,9 @@ Read by `ship`.
 
 - **Base branch:** `main`
 - **Merge:** squash; remote branch left
-- **Deploy:** none, the merge is the release: GitHub Pages serves `main` at factory.eatkale.ai with no workflow to run
+- **Deploy:** none, the merge is the release: GitHub Pages serves `main` at factory.redkale.ai with no workflow to run
 - **Deploy green:** `gh api repos/Kale-BI/software-factory/pages/builds/latest --jq '.status + " " + .created_at'` reports `built` with a time after the merge
-- **Canary:** open the changed page at `https://factory.eatkale.ai/<page>.html` and see the change rendered; then check that the source the page restates (the `README.md` table names it) still says what the page now says
+- **Canary:** open the changed page at `https://factory.redkale.ai/<page>.html` and see the change rendered; then check that the source the page restates (the `README.md` table names it) still says what the page now says
 - **Local cleanup:** remove the ticket worktree, delete the local branch, fast-forward `main`
 
 ## Guardrails
