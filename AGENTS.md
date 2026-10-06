@@ -21,7 +21,7 @@ Single-context: `CONTEXT.md` and `docs/adr/` at the repo root, created lazily. S
 Read by `ship`.
 
 - **Base branch:** `main`
-- **Merge:** squash; remote branch left
+- **Merge:** squash; GitHub deletes the branch on merge
 - **Deploy:** none, the merge is the release: GitHub Pages serves `main` at factory.redkale.ai with no workflow to run
 - **Deploy green:** `gh api repos/Kale-BI/software-factory/pages/builds/latest --jq '.status + " " + .created_at'` reports `built` with a time after the merge
 - **Canary:** open the changed page at `https://factory.redkale.ai/<page>.html` and see the change rendered; then check that the source the page restates (the `README.md` table names it) still says what the page now says
